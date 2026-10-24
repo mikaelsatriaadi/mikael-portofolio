@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mikael Satria Adi | Portofolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== TEMA NAVY: ubah warna di sini ===== */
+    :root {
+      --navy-900: #070d22;
+      --navy-800: #0b1533;
+      --navy-700: #121f47;
+      --navy-600: #1b2c5e;
+      --blue: #3b82ff;
+      --cyan: #4fe3ff;
+      --text: #e6edff;
+      --muted: #9aaad0;
+      --line: rgba(120, 150, 255, .18);
+      --side: 280px;
+      --head: "Sora", system-ui, sans-serif;
+      --body: "IBM Plex Sans", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy-900); color: var(--text); font-family: var(--body); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+    svg.ic { width: 1.1em; height: 1.1em; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    /* ===== SIDEBAR ===== */
+    aside {
+      position: fixed; inset: 0 auto 0 0; width: var(--side);
+      background: linear-gradient(180deg, var(--navy-800), var(--navy-900));
+      border-right: 1px solid var(--line);
+      padding: 40px 28px; display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .avatar {
+      width: 132px; height: 132px; border-radius: 50%; padding: 4px;
+      background: conic-gradient(from 180deg, var(--blue), var(--cyan), var(--blue));
+      box-shadow: 0 0 34px rgba(59, 130, 255, .35);
+    }
+    .avatar .in { width: 100%; height: 100%; border-radius: 50%; background: var(--navy-700); display: grid; place-items: center; overflow: hidden; font-family: var(--head); font-size: 2.6rem; font-weight: 800; color: var(--cyan); position: relative; }
+    .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    aside h2 { font-family: var(--head); font-size: 1.25rem; margin-top: 20px; line-height: 1.3; }
+    aside .sub { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+    .menu { list-style: none; margin: 38px 0 auto; width: 100%; display: grid; gap: 6px; }
+    .menu a { display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 10px; color: var(--muted); font-size: .95rem; text-align: left; transition: background .2s, color .2s; }
+    .menu a:hover { background: var(--navy-700); color: var(--text); }
+    .menu a.active { background: var(--navy-600); color: var(--cyan); }
+    .social { display: flex; gap: 12px; font-size: 1.25rem; color: var(--muted); }
+    .social a { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: color .2s, border-color .2s; }
+    .social a:hover { color: var(--cyan); border-color: var(--cyan); }
+
+    /* ===== KONTEN ===== */
+    main { margin-left: var(--side); }
+    section { padding: 96px 64px; max-width: 980px; }
+    section + section { border-top: 1px solid var(--line); }
+    h3.title { font-family: var(--head); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 14px; }
+    .lead { color: var(--muted); max-width: 56ch; margin-bottom: 40px; }
+
+    /* ===== HERO + OSILOSKOP ===== */
+    #home { padding-top: 72px; }
+    .hello { color: var(--cyan); font-family: var(--mono); font-size: .95rem; margin-bottom: 12px; }
+    #home h1 { font-family: var(--head); font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 800; line-height: 1.08; letter-spacing: -.02em; }
+    #home .desc { color: var(--muted); font-size: 1.15rem; margin: 20px 0 30px; max-width: 46ch; }
+    .btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn { padding: 14px 26px; border-radius: 999px; font-weight: 500; border: 1px solid var(--line); transition: transform .15s, box-shadow .2s; }
+    .btn.fill { background: linear-gradient(90deg, var(--blue), #2563eb); border-color: transparent; box-shadow: 0 8px 28px rgba(59, 130, 255, .35); }
+    .btn:hover { transform: translateY(-2px); }
+    .scope {
+      position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: #050a1c;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .scope canvas { display: block; width: 100%; height: 230px; }
+    .readout { position: absolute; left: 16px; top: 12px; right: 16px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: .82rem; color: var(--cyan); }
+    .readout span:last-child { color: var(--muted); }
+
+    /* ===== TENTANG ===== */
+    .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+    .about-grid p { color: var(--muted); font-size: 1.1rem; line-height: 1.9; margin-bottom: 28px; }
+    .photo-frame { position: relative; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; background: var(--navy-800); border: 1px solid var(--line); box-shadow: 0 0 40px rgba(59, 130, 255, .18); }
+    .photo-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .placeholder { position: absolute; inset: 0; display: grid; place-content: center; gap: 6px; text-align: center; padding: 16px; color: var(--muted); font-family: var(--mono); font-size: .82rem; background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(120,150,255,.06) 14px 15px); }
+    .placeholder b { color: var(--cyan); font-weight: 500; font-size: .95rem; }
+    .spec { background: var(--navy-800); border: 1px solid var(--line); border-radius: 16px; padding: 8px 24px; }
+    .spec div { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px dashed var(--line); }
+    .spec div:last-child { border: 0; }
+    .spec dt { color: var(--muted); font-size: .92rem; }
+    .spec dd { font-family: var(--mono); font-size: .92rem; text-align: right; }
+
+    /* ===== KEAHLIAN ===== */
+    .skill-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .skill-group { background: var(--navy-800); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+    .skill-group h4 { font-family: var(--head); font-size: 1.1rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .skill-group h4 .ic { color: var(--cyan); }
+    .skill-group ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-group li { background: var(--navy-700); border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; font-size: .95rem; }
+
+    /* ===== PROYEK ===== */
+    .rows { border-top: 1px solid var(--line); }
+    .row { display: grid; grid-template-columns: 1fr 300px; gap: 32px; padding: 34px 20px; border-bottom: 1px solid var(--line); border-left: 3px solid transparent; transition: background .25s, border-color .25s; }
+    .row:hover { background: var(--navy-800); border-left-color: var(--cyan); }
+    .row h4 { font-family: var(--head); font-size: 1.25rem; margin-bottom: 8px; }
+    .row p { color: var(--muted); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chips span { font-family: var(--mono); font-size: .8rem; color: var(--cyan); background: rgba(79, 227, 255, .08); border-radius: 999px; padding: 4px 14px; }
+    .proof { position: relative; aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: var(--navy-800); border: 1px solid var(--line); cursor: zoom-in; align-self: start; }
+    .proof img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+    .proof:hover img { transform: scale(1.04); }
+    .proof .placeholder { cursor: default; }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(4, 8, 22, .92); display: none; place-items: center; padding: 24px; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 0 60px rgba(59,130,255,.35); }
+
+    /* ===== PENDIDIKAN ===== */
+    .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; position: relative; padding-top: 34px; }
+    .edu::before { content: ""; position: absolute; top: 9px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--blue), transparent); }
+    .edu-card { background: var(--navy-800); border: 1px solid var(--line); border-radius: 16px; padding: 28px; position: relative; }
+    .edu-card::before { content: ""; position: absolute; top: -34px; left: 28px; width: 20px; height: 20px; border-radius: 50%; background: var(--navy-900); border: 3px solid var(--cyan); box-shadow: 0 0 14px rgba(79, 227, 255, .6); }
+    .edu-card time { font-family: var(--mono); color: var(--cyan); font-size: .9rem; }
+    .edu-card h4 { font-family: var(--head); font-size: 1.2rem; margin: 8px 0; }
+    .edu-card p { color: var(--muted); font-size: .98rem; }
+
+    /* ===== KONTAK ===== */
+    .contact-list { display: grid; gap: 14px; max-width: 520px; }
+    .contact-list a { display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-radius: 14px; background: var(--navy-800); border: 1px solid var(--line); transition: border-color .2s, transform .15s; }
+    .contact-list a:hover { border-color: var(--cyan); transform: translateX(6px); }
+    .contact-list .ic { color: var(--cyan); font-size: 1.3rem; }
+    footer { padding: 36px 64px 48px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); font-family: var(--mono); }
+
+    /* ===== RESPONSIF ===== */
+    @media (max-width: 900px) {
+      aside { position: sticky; top: 0; inset: auto; width: 100%; flex-direction: row; align-items: center; padding: 10px 16px; gap: 14px; z-index: 20; text-align: left; border-right: 0; border-bottom: 1px solid var(--line); }
+      .avatar { width: 44px; height: 44px; padding: 2px; flex-shrink: 0; box-shadow: none; }
+      .avatar .in { font-size: 1rem; }
+      aside h2 { margin: 0; font-size: 1rem; white-space: nowrap; }
+      aside .sub, .social { display: none; }
+      .menu { margin: 0; display: flex; overflow-x: auto; gap: 4px; scrollbar-width: none; }
+      .menu a { padding: 8px 12px; white-space: nowrap; }
+      .menu a svg { display: none; }
+      main { margin-left: 0; }
+      section { padding: 64px 22px; }
+      #home { padding-top: 48px; }
+      .about-grid, .edu { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 1fr; }
+      .skill-groups { grid-template-columns: 1fr; }
+      .photo-frame { max-width: 320px; }
+      footer { padding: 28px 22px 40px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</head>
+
+<body>
+  <!-- ===== SIDEBAR ===== -->
+<aside>
+  <div class="avatar">
+    <div class="in">
+      NK
+      <!-- Foto sidebar: pakai file gambar/foto-profil.jpg -->
+      <img src="gambar/foto-profil.jpg" alt="Foto profil" onerror="this.remove()" />
+    </div>
+  </div>
+  <h2>Mikael Satria Adi</h2>
+  <p class="sub">Calon Insinyur Elektro</p>
+
+  <ul class="menu">
+    <li><a href="#home" class="active"><svg class="ic" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Beranda</a></li>
+    <li><a href="#tentang"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Tentang</a></li>
+    <li><a href="#keahlian"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Keahlian</a></li>
+    <li><a href="#proyek"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>Proyek</a></li>
+    <li><a href="#pendidikan"><svg class="ic" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>Pendidikan</a></li>
+    <li><a href="#kontak"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Kontak</a></li>
+  </ul>
+
+  <div class="social">
+    <a href="mailto:mikaelsatria9@gmail.com" aria-label="Email"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+    <a href="https://www.instagram.com/miikll_?obrf=djViNWw1cmN3ODk2" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    <a href="https://www.linkedin.com/in/mikael-satria-adi-782291445?utm_source=chatgpt.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-5M12 13a3 3 0 016 0v3"/></svg></a>
+  </div>
+</aside>
+
+  <main>
+    <!-- ===== BERANDA ===== -->
+<section id="home">
+  <p class="hello">Halo, saya</p>
+  <h1>Mikael Satria Adi</h1>
+  <p class="desc">Mahasiswa Teknologi Rekayasa Elektro di Universitas Gadjah Mada dengan pengalaman dalam pengembangan inovasi teknik, perakitan perangkat elektronik, dan pemecahan masalah teknis. Memiliki ketertarikan pada riset dan pengembangan, sistem elektronika, serta pengembangan solusi rekayasa untuk permasalahan nyata.</p>
+  <div class="btns">
+    <a class="btn fill" href="#proyek">Lihat proyek</a>
+    <a class="btn" href="#kontak">Hubungi saya</a>
+  </div>
+
+  <!-- Osiloskop interaktif: gerakkan mouse / sentuh layar -->
+  <div class="scope" aria-label="Gelombang sinus interaktif">
+    <div class="readout"><span id="rdFreq">f = 2.0 Hz</span><span>gerakkan kursor untuk mengubah gelombang</span><span id="rdAmp">Vpp = 3.0 V</span></div>
+    <canvas id="wave"></canvas>
+  </div>
+</section>
+<!-- ===== TENTANG ===== -->
+<section id="tentang">
+  <h3 class="title">Tentang saya</h3>
+  <p class="lead">Sedikit cerita tentang siapa saya dan apa yang sedang saya pelajari.</p>
+  <div class="about-grid">
+    <!-- FOTO KAMU: simpan file di folder "gambar" dengan nama foto-about.jpg -->
+    <figure class="photo-frame">
+      <div class="placeholder"><b>Foto kamu di sini</b><span>gambar/foto-about.jpg</span></div>
+      <img src="gambar/foto-about.jpg" alt="Foto Nama Kamu" onerror="this.remove()" />
+    </figure>
+    <div>
+      <p>
+        Saya adalah mahasiswa Teknologi Rekayasa Elektro di Universitas Gadjah Mada yang memiliki ketertarikan pada riset, inovasi teknik, dan pengembangan perangkat elektronik.
+
+Ketertarikan saya terhadap rekayasa dimulai sejak menempuh pendidikan di SMK Teknik Mekatronika. Saya terlibat dalam pengembangan berbagai inovasi, termasuk Pair Dry, perangkat pengering sepatu, dan Smart Stove, sistem pemantauan dan keselamatan kompor. Pengalaman tersebut mendorong saya untuk memahami bagaimana konsep teknik dapat diterapkan untuk menjawab kebutuhan nyata.
+
+Selain mengembangkan proyek, saya juga memiliki pengalaman memimpin tim riset siswa dan menjalani praktik kerja selama lima bulan di PT ATMI Solo. Selama praktik, saya terlibat dalam pemecahan masalah mesin CNC, perakitan perangkat, serta pengujian fungsional peralatan.
+
+Saat ini, saya terus memperkuat fondasi ilmu elektro dan mengembangkan kemampuan analitis, pemecahan masalah, serta keterampilan teknis. Ke depannya, saya ingin berkontribusi dalam kegiatan riset dan pengembangan yang menghasilkan solusi rekayasa yang bermanfaat.
+      </p>
+      <dl class="spec">
+        <div><dt>Kampus</dt><dd>Universitas Gadjah Mada</dd></div>
+        <div><dt>Jurusan</dt><dd>Teknologi Rekayasa Elektro</dd></div>
+        <div><dt>Lokasi</dt><dd>Klaten, Indonesia</dd></div>
+        <div><dt>Fokus</dt><dd>Engineering Innovation &amp; R&amp;D</dd></div>
+        <div><dt>Status</dt><dd>Terbuka untuk kolaborasi</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+<!-- ===== KEAHLIAN ===== -->
+<section id="keahlian">
+  <h3 class="title">Keahlian</h3>
+  <p class="lead">Bidang yang saya kuasai dan terus saya pelajari.</p>
+  <div class="skill-groups">
+    <div class="skill-group">
+      <h4><svg class="ic" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>Elektronika &amp; Sistem Kelistrikan</h4>
+      <ul><li>Electronic Circuit Fundamentals</li><li>Electrical Equipment Assembly</li><li>Circuit Troubleshooting</li><li>Functional Testing</li></ul>
+    </div>
+    <div class="skill-group">
+      <h4><svg class="ic" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>Engineering &amp; Riset</h4>
+      <ul><li>Prototyping</li><li>Technical Troubleshooting</li><li>Technical Documentation</li><li>Engineering Problem Solving</li></ul>
+    </div>
+    <div class="skill-group">
+      <h4><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Pemrograman &amp; Sistem Tertanam</h4>
+      <ul><li>C</li><li>C++</li><li>Python</li></ul>
+    </div>
+    <div class="skill-group">
+      <h4><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Kepemimpinan &amp; Kolaborasi</h4>
+      <ul><li>Research Coordination</li><li>Komunikasi Teknis</li><li>Team Leadership</li><li>Teamwork</li></ul>
+    </div>
+  </div>
+</section>
+<!-- ===== PROYEK ===== -->
+<section id="proyek">
+  <h3 class="title">Proyek dan pengalaman</h3>
+  <p class="lead">Beberapa hal yang pernah saya bangun dan kerjakan.</p>
+  <div class="rows">
+    <article class="row">
+      <div>
+        <h4>Pair Dry</h4>
+        <p>Pair Dry adalah perangkat pengering sepatu yang dikembangkan untuk menyediakan solusi praktis dalam proses pengeringan alas kaki. Proyek ini melibatkan pengembangan prototipe dengan sistem aliran udara dan pemanas. Pengembangan Pair Dry menjadi pengalaman awal saya dalam menerapkan konsep teknik untuk menghasilkan solusi yang berorientasi pada kebutuhan pengguna.
+
+Fokus: Prototyping, Electrical Systems, Product Development.</p>
+        <div class="chips"><span>Prototyping</span><span>Electrical Equipment Assembly</span><span>Engineering Problem Solving</span></div>
+      </div>
+      <div class="proof">
+        <div class="placeholder"><b>Bukti proyek 1</b><span>gambar/proyek-1.jpg</span></div>
+        <img src="gambar/proyek-1.jpg" alt="Bukti Judul Proyek Pertama" onerror="this.remove()" />
+      </div>
+    </article>
+    <article class="row">
+      <div>
+        <h4>Smart Stove</h4>
+        <p>Smart Stove merupakan proyek inovasi berupa sistem pemantauan dan keselamatan kompor. Proyek ini dikembangkan dengan menggabungkan perangkat elektronik dan konsep pemantauan berbasis aplikasi untuk mendukung pengawasan serta pengendalian kompor. Proyek ini memperluas pengalaman saya dalam pengembangan prototipe dan penerapan teknologi untuk meningkatkan keselamatan pengguna.</p>
+        <div class="chips"><span>Prototyping</span><span>Electronic Circuit Fundamentals</span><span>Engineering Problem Solving</span></div>
+      </div>
+      <div class="proof">
+        <div class="placeholder"><b>Bukti proyek 2</b><span>gambar/proyek-2.jpg</span></div>
+        <img src="gambar/proyek-2.jpg" alt="Bukti Judul Proyek Kedua" onerror="this.remove()" />
+      </div>
+    </article>
+    <article class="row">
+      <div>
+        <h4>CNC VMC 60E Troubleshooting</h4>
+        <p>Selama praktik kerja di PT ATMI Solo, saya berkolaborasi dengan tim untuk menganalisis permasalahan pada mesin CNC VMC 60E sebelum pengiriman. Permasalahan yang ditangani meliputi limit axis, mekanisme pergantian tool, dan kendala terkait motor. Saya mempelajari manual teknis, menganalisis kemungkinan penyebab, serta mendiskusikan temuan bersama tim sebelum melakukan langkah penanganan.
+
+Fokus: CNC Troubleshooting, Technical Manuals, Problem Solving, Teamwork.</p>
+        <div class="chips"><span>Technical Troubleshooting</span><span>Engineering Problem Solving</span><span>Teamwork</span></div>
+      </div>
+      <div class="proof">
+        <div class="placeholder"><b>Bukti proyek 3</b><span>gambar/proyek-3.jpg</span></div>
+        <img src="gambar/proyek-3.jpg" alt="Bukti Judul Proyek Ketiga" onerror="this.remove()" />
+      </div>
+    </article>
+    <article class="row">
+      <div>
+        <h4>X-Ray Viewer</h4>
+        <p>Selama praktik kerja di PT ATMI Solo, saya mengerjakan perakitan dan pengembangan X-ray viewer secara mandiri. Pengujian dilakukan bersama supervisor saya dan seorang dokter dari rumah sakit di Jerman yang mewakili pelanggan. Pengalaman ini memberi saya kesempatan untuk terlibat langsung dalam pekerjaan perakitan peralatan dan proses pengujian fungsional.
+
+Fokus: Equipment Assembly, Functional Testing, Technical Problem Solving.</p>
+        <div class="chips"><span>Electrical Equipment Assembly</span><span>Functional Testing</span><span>Engineering Problem Solving</span></div>
+      </div>
+      <div class="proof">
+        <div class="placeholder"><b>Bukti proyek 4</b><span>gambar/proyek-4.jpg</span></div>
+        <img src="gambar/proyek-4.jpg" alt="Bukti Judul Proyek Keempat" onerror="this.remove()" />
+      </div>
+    </article>
+  </div>
+</section>
+<!-- ===== PENDIDIKAN ===== -->
+<section id="pendidikan">
+  <h3 class="title">Pendidikan</h3>
+  <p class="lead">Perjalanan belajar saya sejauh ini.</p>
+  <div class="edu">
+    <div class="edu-card">
+      <time>2023 – 2026</time>
+      <h4>SMK Leonardo Klaten</h4>
+      <p>Jurusan Teknik Mekatronika. Mengembangkan pengalaman dalam proyek inovasi teknik, kegiatan riset siswa, perakitan perangkat, serta kepemimpinan tim pengembangan inovasi.</p>
+    </div>
+    <div class="edu-card">
+      <time>2026 – sekarang</time>
+      <h4>Universitas Gadjah Mada</h4>
+      <p>Mahasiswa Program Studi Teknologi Rekayasa Elektro. Berfokus pada pengembangan fondasi ilmu elektro, pemahaman sistem kelistrikan, elektronika, dan penerapan teknologi rekayasa.</p>
+    </div>
+  </div>
+</section>
+<!-- ===== KONTAK ===== -->
+<section id="kontak">
+  <h3 class="title">Kontak</h3>
+  <p class="lead">Punya ide, proyek, atau sekadar ingin menyapa? Hubungi saya lewat:</p>
+  <div class="contact-list">
+    <a href="mailto:mikaelsatria9@gmail.com"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>mikaelsatria9@gmail.com</a>
+    <a href="https://www.linkedin.com/in/mikael-satria-adi-782291445?utm_source=chatgpt.com" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-5M12 13a3 3 0 016 0v3"/></svg>linkedin.com/in/mikaelsatriaadi</a>
+    <a href="https://www.instagram.com/miikll_?obrf=djViNWw1cmN3ODk2" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@miikll_/</a>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox"><img alt="" /></div>
+
+<footer>© <span id="year"></span> Mikael Satria Adi</footer>
+  </main>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ===== Osiloskop: mouse X = frekuensi, mouse Y = amplitudo ===== */
+  const cv = document.getElementById("wave");
+  const ctx = cv.getContext("2d");
+  const rdF = document.getElementById("rdFreq"), rdA = document.getElementById("rdAmp");
+  let W, H, t = 0, freq = 2, amp = 0.55, tf = 2, ta = 0.55;
+
+  function resize() {
+    const d = devicePixelRatio || 1;
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * d; cv.height = H * d;
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function wave(color, glow, a, f, phase, lw) {
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 2) {
+      const y = H / 2 + Math.sin((x / W) * Math.PI * 2 * f + phase) * a * (H / 2 - 24);
+      x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.shadowColor = glow; ctx.shadowBlur = glow ? 14 : 0;
+    ctx.stroke();
+  }
+  function draw() {
+    freq += (tf - freq) * 0.08; amp += (ta - amp) * 0.08;
+    ctx.clearRect(0, 0, W, H);
+    wave("rgba(59,130,255,.55)", "", amp * 0.7, freq * 1.5, -t * 0.7 + 1, 2);
+    wave("#4fe3ff", "#4fe3ff", amp, freq, -t, 2.5);
+    rdF.textContent = "f = " + freq.toFixed(1) + " Hz";
+    rdA.textContent = "Vpp = " + (amp * 6).toFixed(1) + " V";
+    if (!reduce) { t += 0.04; requestAnimationFrame(draw); }
+  }
+  function track(e) {
+    const r = cv.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    const nx = Math.min(Math.max((p.clientX - r.left) / r.width, 0), 1);
+    const ny = Math.min(Math.max((p.clientY - r.top) / r.height, 0), 1);
+    tf = 1 + nx * 5; ta = 0.15 + (1 - ny) * 0.8;
+    if (reduce) draw();
+  }
+  resize(); draw();
+  addEventListener("resize", () => { resize(); if (reduce) draw(); });
+  cv.parentElement.addEventListener("mousemove", track);
+  cv.parentElement.addEventListener("touchmove", track, { passive: true });
+
+  /* ===== Klik gambar bukti untuk memperbesar ===== */
+  const lb = document.getElementById("lightbox"), lbImg = lb.querySelector("img");
+  document.querySelectorAll(".proof, .photo-frame").forEach((box) => {
+    box.addEventListener("click", () => {
+      const img = box.querySelector("img");
+      if (!img) return;
+      lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add("open");
+    });
+  });
+  lb.addEventListener("click", () => lb.classList.remove("open"));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") lb.classList.remove("open"); });
+
+  /* ===== Menu aktif mengikuti scroll ===== */
+  const links = [...document.querySelectorAll(".menu a")];
+  const secs = links.map((a) => document.querySelector(a.getAttribute("href")));
+  const spy = new IntersectionObserver((es) => {
+    es.forEach((e) => {
+      if (e.isIntersecting) links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  secs.forEach((s) => spy.observe(s));
+</script>
+</body>
+</html>
